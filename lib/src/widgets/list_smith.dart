@@ -79,7 +79,7 @@ class ListSmith<T extends Object> extends StatelessWidget {
   ///
   /// 2 pairings are asserted: a non-empty [query] needs an [AsyncSearch], and a signal-reading end policy
   /// needs `withSignal` fetchers on both the feed and the search.
-  new async({
+  ListSmith.async({
     required PageFetcher<T> fetchPage,
     required this.itemBuilder,
     int pageSize = 20,
@@ -127,7 +127,7 @@ class ListSmith<T extends Object> extends StatelessWidget {
   ///
   /// [searchBy] is required: there's nothing to paginate or refresh over in-memory data, so search is
   /// the whole point. [searchDebounce] defaults to zero, an in-memory filter being instant.
-  new sync({
+  ListSmith.sync({
     required Iterable<T> items,
     required SyncSearchPredicate<T> searchBy,
     required this.itemBuilder,

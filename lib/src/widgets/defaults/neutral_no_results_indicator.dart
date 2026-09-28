@@ -8,7 +8,7 @@ import '/src/utils/neutral_theme.dart';
 /// to replace it.
 class NeutralNoResultsIndicator extends StatelessWidget {
   /// Creates it.
-  const new({super.key});
+  const NeutralNoResultsIndicator({super.key});
 
   @override
   Widget build(BuildContext context) => Center(

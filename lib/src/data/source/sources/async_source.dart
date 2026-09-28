@@ -27,7 +27,7 @@ final class AsyncSource<T extends Object> extends ListSource<T> {
   final ItemId<T>? itemId;
 
   /// Creates it.
-  const new({
+  const AsyncSource({
     required this.fetchPage,
     required this.pageSize,
     required this.endPolicy,

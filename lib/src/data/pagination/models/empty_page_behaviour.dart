@@ -16,7 +16,7 @@ part 'empty_page_behaviours/show_empty_surface.dart';
 /// [StopOnEmptyPagesPolicy.emptyRunBeforeEnd] or a signal policy. [ListSmith.async] only.
 sealed class EmptyPageBehaviour {
   /// Const base constructor.
-  const new();
+  const EmptyPageBehaviour();
 
   /// Whether to page past the current empty page. Called after each page lands.
   bool shouldAdvance(EmptyPageContext context);

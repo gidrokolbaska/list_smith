@@ -6,6 +6,7 @@ version: 1.0.0
 homepage: https://github.com/LahaLuhem/list_smith?tab=readme-ov-file
 repository: https://github.com/LahaLuhem/list_smith
 issue_tracker: https://github.com/LahaLuhem/list_smith/issues
+publish_to: none
 
 topics:
   - listview
@@ -14,21 +15,8 @@ topics:
   - pull-to-refresh
   - search
 
-screenshots:
-  - description: >-
-      A tour: async pagination and pull-to-refresh, client-side search with the no-results
-      surface, and grouping into labelled sections.
-    path: doc/screenshots/1-overview.webp
-  - description: >-
-      Grouping a filtered list into labelled sections, rendered natively on Android (Material).
-    path: doc/screenshots/2-android-material.png
-  - description: >-
-      The same list and code, rendered natively on iOS (Cupertino).
-    path: doc/screenshots/3-ios-cupertino.png
-
 environment:
-  sdk: ">=3.13.0 <4.0.0"
-  flutter: ">=3.47.0"
+  sdk: ^3.11.1
 
 dependencies:
   flutter:
@@ -36,7 +24,7 @@ dependencies:
   infinite_scroll_pagination: ^5.1.1
   custom_refresh_indicator: ^4.0.1
   collection: ^1.19.1
-  meta: ^1.18.0
+  meta: ^1.17.0
   pool: ^1.5.2
   multi_value_listenable_builder_typed: ^0.2.1
 

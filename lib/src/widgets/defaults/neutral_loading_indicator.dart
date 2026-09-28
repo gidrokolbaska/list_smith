@@ -15,7 +15,7 @@ class NeutralLoadingIndicator extends StatelessWidget {
   final bool isCompact;
 
   /// Creates it.
-  const new({this.isCompact = false, super.key});
+  const NeutralLoadingIndicator({this.isCompact = false, super.key});
 
   @override
   Widget build(BuildContext context) => isCompact

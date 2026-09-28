@@ -6,7 +6,7 @@ part of '../group_order_policy.dart';
 /// [RepairHeadersPolicy] only pays that in debug.
 final class FailOnUnorderedPolicy extends GroupOrderPolicy {
   /// Creates it.
-  const new();
+  const FailOnUnorderedPolicy();
 
   @override
   String toString() => 'FailOnUnorderedPolicy()';

@@ -13,5 +13,5 @@ part 'refreshes/pull_to_refresh.dart';
 /// be set on a list that never refreshes. [ListSmith.async] only.
 sealed class Refresh {
   /// Const base constructor.
-  const new();
+  const Refresh();
 }

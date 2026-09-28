@@ -7,7 +7,7 @@ part of '../pagination_end_policy.dart';
 /// instead.
 final class ExplicitHasMorePolicy extends PaginationEndPolicy {
   /// Creates it.
-  const new();
+  const ExplicitHasMorePolicy();
 
   @override
   bool hasReachedEnd(EndContext context) => context.lastPageSignal == false;

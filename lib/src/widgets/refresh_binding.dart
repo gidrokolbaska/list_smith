@@ -24,7 +24,12 @@ class RefreshBinding extends StatelessWidget {
   final RefreshIndicatorBuilder? indicatorBuilder;
 
   /// Creates it.
-  const new({required this.child, required this.onRefresh, this.indicatorBuilder, super.key});
+  const RefreshBinding({
+    required this.child,
+    required this.onRefresh,
+    this.indicatorBuilder,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) => CustomRefreshIndicator(

@@ -20,7 +20,7 @@ base class PageRequest {
   final FetchTrigger trigger;
 
   /// Creates it.
-  const new({
+  const PageRequest({
     required this.pageIndex,
     required this.pageSize,
     required this.trigger,

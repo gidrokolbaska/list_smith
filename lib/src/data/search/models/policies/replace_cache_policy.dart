@@ -7,7 +7,7 @@ part of '../search_cache_policy.dart';
 /// was never told about.
 final class ReplaceCachePolicy extends SearchCachePolicy {
   /// Creates it.
-  const new();
+  const ReplaceCachePolicy();
 
   @override
   String toString() => 'ReplaceCachePolicy()';

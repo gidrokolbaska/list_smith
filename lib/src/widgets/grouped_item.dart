@@ -29,7 +29,7 @@ class GroupedItem<T extends Object> extends StatelessWidget {
   final int index;
 
   /// Creates it.
-  const new({
+  const GroupedItem({
     required this.itemBuilder,
     required this.groupOf,
     required this.headerFor,

@@ -26,7 +26,7 @@ import '/src/data/pagination/enums/fetch_trigger.dart';
 /// keep them cheap or you stall the list. Async only: a `.sync` list has nothing to watch.
 abstract base class ListSmithObserver {
   /// Const default constructor.
-  const new();
+  const ListSmithObserver();
 
   /// A page came back, before it reaches the list. [pageIndex] is 0-based.
   ///

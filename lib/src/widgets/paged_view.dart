@@ -64,7 +64,7 @@ class PagedView<T extends Object> extends StatelessWidget {
   final WidgetBuilder? noMoreItemsBuilder;
 
   /// Creates it.
-  const new({
+  const PagedView({
     required this.state,
     required this.fetchNextPage,
     required this.itemBuilder,
@@ -152,7 +152,12 @@ class _ResolvedError extends StatelessWidget {
   final ErrorBuilder? builder;
   final bool isCompact;
 
-  const new({required this.error, required this.onRetry, this.builder, this.isCompact = false});
+  const _ResolvedError({
+    required this.error,
+    required this.onRetry,
+    this.builder,
+    this.isCompact = false,
+  });
 
   @override
   Widget build(BuildContext context) {

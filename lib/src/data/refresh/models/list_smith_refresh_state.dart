@@ -15,7 +15,7 @@ class ListSmithRefreshState {
   final double value;
 
   /// Creates it.
-  const new({required this.phase, required this.value});
+  const ListSmithRefreshState({required this.phase, required this.value});
 
   @override
   String toString() => 'ListSmithRefreshState(phase: $phase, value: $value)';
@@ -30,7 +30,5 @@ class ListSmithRefreshState {
 }
 
 /// Draws the pull indicator. Only called mid-pull, and list_smith decides where it sits.
-typedef RefreshIndicatorBuilder = Widget Function(
-  BuildContext context,
-  ListSmithRefreshState state,
-);
+typedef RefreshIndicatorBuilder =
+    Widget Function(BuildContext context, ListSmithRefreshState state);

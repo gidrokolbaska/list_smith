@@ -15,7 +15,7 @@ final class KeyedGrouping<T extends Object> extends Grouping<T> {
   /// What to do when async pages don't arrive grouped by key.
   final GroupOrderPolicy orderPolicy;
 
-  const new _({required this.groupOf, required this.headerFor, required this.orderPolicy});
+  KeyedGrouping._({required this.groupOf, required this.headerFor, required this.orderPolicy});
 
   @override
   List<T> arrange(Iterable<T> items) => bucketByGroup(items, groupOf);

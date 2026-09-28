@@ -8,7 +8,8 @@ final class FixedPageCountPolicy extends PaginationEndPolicy {
   final int pageCount;
 
   /// Ends after [pageCount] pages.
-  const new({required this.pageCount}) : assert(pageCount >= 1, 'pageCount must be at least 1.');
+  const FixedPageCountPolicy({required this.pageCount})
+    : assert(pageCount >= 1, 'pageCount must be at least 1.');
 
   @override
   bool hasReachedEnd(EndContext context) => context.pageCount >= pageCount;

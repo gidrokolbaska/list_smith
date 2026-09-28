@@ -6,7 +6,7 @@ part of '../empty_page_behaviour.dart';
 /// pages this parks the list on the 1st empty one, so pass [AdvanceToFirstNonEmpty] to page through.
 final class ShowEmptySurface extends EmptyPageBehaviour {
   /// Creates it.
-  const new();
+  const ShowEmptySurface();
 
   @override
   bool shouldAdvance(EmptyPageContext context) => false;

@@ -16,5 +16,9 @@ final class EmptyPageContext {
   final int pagesLoaded;
 
   /// Creates it.
-  const new({required this.isEmpty, required this.isMoreAvailable, required this.pagesLoaded});
+  const EmptyPageContext({
+    required this.isEmpty,
+    required this.isMoreAvailable,
+    required this.pagesLoaded,
+  });
 }

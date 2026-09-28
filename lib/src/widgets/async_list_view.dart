@@ -86,7 +86,7 @@ class AsyncListView<T extends Object> extends StatefulWidget {
   final ListSmithController<T>? controller;
 
   /// Creates it.
-  const new({
+  const AsyncListView({
     required this.source,
     required this.itemBuilder,
     required this.grouping,
@@ -617,7 +617,7 @@ final class _ReloadRun<T extends Object> implements ReloadContext<T> {
   /// Booked by a caller that met this run live and must not be lost. Runs once this one is done.
   FetchTrigger? rerun;
 
-  new(this._engine, this.trigger) : _epoch = _engine._generation;
+  _ReloadRun(this._engine, this.trigger) : _epoch = _engine._generation;
 
   /// Completes once the reload finishes, committed or not, after the engine has let go of the run.
   Future<void> get done => _done.future;
@@ -682,7 +682,7 @@ final class _NormalSnapshot<T extends Object> {
   /// An ask made while the feed sat here, paid by a re-read once it is put back.
   FetchTrigger? debt;
 
-  new({required this.state, required this.signal, this.debt});
+  _NormalSnapshot({required this.state, required this.signal, this.debt});
 
   /// Books [trigger] against the feed. A refresh is never downgraded to a re-read.
   void owe(FetchTrigger trigger) => debt = _stronger(debt, trigger);

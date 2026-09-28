@@ -24,7 +24,7 @@ class ListScrollConfig {
   final double? cacheExtent;
 
   /// Creates it.
-  const new({
+  const ListScrollConfig({
     this.padding,
     this.physics,
     this.controller,

@@ -13,7 +13,7 @@ final class SyncSource<T extends Object> extends ListSource<T> {
   final SyncSearchPredicate<T> searchBy;
 
   /// Creates it.
-  const new({required this.items, required this.searchBy});
+  const SyncSource({required this.items, required this.searchBy});
 
   @override
   String toString() => 'SyncSource()';

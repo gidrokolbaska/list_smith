@@ -11,7 +11,7 @@ part of '../search_cache_policy.dart';
 /// - a `reset()` while searching drops it, so it starts over
 final class KeepCachePolicy extends SearchCachePolicy {
   /// Creates it.
-  const new();
+  const KeepCachePolicy();
 
   @override
   String toString() => 'KeepCachePolicy()';

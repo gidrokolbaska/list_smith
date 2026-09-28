@@ -11,7 +11,7 @@ final class PullToRefresh extends Refresh {
   final Reload reload;
 
   /// Creates it.
-  const new({this.indicatorBuilder, this.reload = const ResetToFirstPage()});
+  const PullToRefresh({this.indicatorBuilder, this.reload = const ResetToFirstPage()});
 
   @override
   String toString() => 'PullToRefresh()';

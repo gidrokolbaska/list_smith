@@ -18,7 +18,7 @@ part 'reloads/reset_to_first_page.dart';
 /// re-fetches every loaded page, so scroll depth survives.
 sealed class Reload {
   /// Const base constructor.
-  const new();
+  const Reload();
 
   /// Does the reload through [context]. The engine calls it, you don't, same as `Widget.build`.
   @internal

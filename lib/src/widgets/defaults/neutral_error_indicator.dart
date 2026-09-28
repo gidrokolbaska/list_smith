@@ -24,7 +24,12 @@ class NeutralErrorIndicator extends StatelessWidget {
   final bool isCompact;
 
   /// Creates it.
-  const new({required this.error, required this.onRetry, this.isCompact = false, super.key});
+  const NeutralErrorIndicator({
+    required this.error,
+    required this.onRetry,
+    this.isCompact = false,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

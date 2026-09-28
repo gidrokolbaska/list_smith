@@ -14,7 +14,7 @@ class NeutralRetryButton extends StatelessWidget {
   final VoidCallback onRetry;
 
   /// Creates it.
-  const new({required this.onRetry, super.key});
+  const NeutralRetryButton({required this.onRetry, super.key});
 
   @override
   Widget build(BuildContext context) {

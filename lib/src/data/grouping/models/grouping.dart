@@ -20,7 +20,7 @@ part 'groupings/no_grouping.dart';
 /// constructors take one.
 sealed class Grouping<T extends Object> {
   /// Const base constructor.
-  const new();
+  const Grouping();
 
   /// Orders [items] for display. Sync path only, since async can't reorder across pages.
   @internal

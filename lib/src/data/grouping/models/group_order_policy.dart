@@ -7,5 +7,5 @@ part 'policies/repair_headers_policy.dart';
 /// sync path reorders for you and ignores this.
 sealed class GroupOrderPolicy {
   /// Const base constructor.
-  const new();
+  const GroupOrderPolicy();
 }

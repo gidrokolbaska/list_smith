@@ -17,7 +17,7 @@ final class EndContext {
   final Object? lastPageSignal;
 
   /// Creates it.
-  const new({required this.pageItemCounts, required this.pageSize, this.lastPageSignal});
+  const EndContext({required this.pageItemCounts, required this.pageSize, this.lastPageSignal});
 
   /// How many pages have been fetched so far.
   int get pageCount => pageItemCounts.length;

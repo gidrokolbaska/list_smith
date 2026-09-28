@@ -12,7 +12,7 @@ part 'policies/stop_on_null_signal_policy.dart';
 /// and [StopOnNullSignalPolicy].
 abstract class PaginationEndPolicy {
   /// Const base constructor.
-  const new();
+  const PaginationEndPolicy();
 
   /// Whether pagination has reached its end, given [context] over the pages loaded so far.
   bool hasReachedEnd(EndContext context);

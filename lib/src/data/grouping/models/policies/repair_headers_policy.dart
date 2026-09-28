@@ -6,7 +6,7 @@ part of '../group_order_policy.dart';
 /// repeat.
 final class RepairHeadersPolicy extends GroupOrderPolicy {
   /// Creates it.
-  const new();
+  const RepairHeadersPolicy();
 
   @override
   String toString() => 'RepairHeadersPolicy()';

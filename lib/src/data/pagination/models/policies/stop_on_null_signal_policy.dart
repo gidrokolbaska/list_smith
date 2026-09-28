@@ -6,7 +6,7 @@ part of '../pagination_end_policy.dart';
 /// next cursor. A `null` before the 1st page has loaded ends nothing.
 final class StopOnNullSignalPolicy extends PaginationEndPolicy {
   /// Creates it.
-  const new();
+  const StopOnNullSignalPolicy();
 
   @override
   bool hasReachedEnd(EndContext context) => context.pageCount > 0 && context.lastPageSignal == null;

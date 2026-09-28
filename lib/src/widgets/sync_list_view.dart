@@ -1,7 +1,6 @@
 /// @docImport 'list_smith.dart';
 library;
 
-import 'package:flutter/rendering.dart' show ScrollCacheExtent;
 import 'package:flutter/widgets.dart';
 
 import '/src/data/grouping/models/grouping.dart';
@@ -53,7 +52,7 @@ class SyncListView<T extends Object> extends StatefulWidget {
   final ListScrollConfig scroll;
 
   /// Creates it.
-  const new({
+  const SyncListView({
     required this.source,
     required this.query,
     required this.minSearchLength,
@@ -139,9 +138,7 @@ class _SyncListViewState<T extends Object> extends State<SyncListView<T>> {
       final separatorBuilder = widget.separatorBuilder;
       final scroll = widget.scroll;
       final cacheExtentPixels = scroll.cacheExtent;
-      final scrollCacheExtent = cacheExtentPixels == null
-          ? null
-          : ScrollCacheExtent.pixels(cacheExtentPixels);
+      final scrollCacheExtent = cacheExtentPixels;
 
       final effectiveItemBuilder = widget.grouping.decorate(
         widget.itemBuilder,
@@ -156,7 +153,7 @@ class _SyncListViewState<T extends Object> extends State<SyncListView<T>> {
               controller: scroll.controller,
               physics: scroll.physics,
               padding: scroll.padding,
-              scrollCacheExtent: scrollCacheExtent,
+              cacheExtent: scrollCacheExtent,
               itemCount: visibleItems.length,
               itemBuilder: (context, index) =>
                   effectiveItemBuilder(context, visibleItems[index], index),
@@ -168,7 +165,7 @@ class _SyncListViewState<T extends Object> extends State<SyncListView<T>> {
               controller: scroll.controller,
               physics: scroll.physics,
               padding: scroll.padding,
-              scrollCacheExtent: scrollCacheExtent,
+              cacheExtent: scrollCacheExtent,
               itemCount: visibleItems.length,
               itemBuilder: (context, index) =>
                   effectiveItemBuilder(context, visibleItems[index], index),

@@ -7,7 +7,7 @@ class NeutralNoMoreItemsIndicator extends StatelessWidget {
   static const double _padding = 16;
 
   /// Creates it.
-  const new({super.key});
+  const NeutralNoMoreItemsIndicator({super.key});
 
   @override
   Widget build(BuildContext context) => Padding(

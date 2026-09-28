@@ -14,5 +14,5 @@ part 'sources/sync_source.dart';
 /// [AsyncSource] (paginated, optionally searchable) or [SyncSource] (in-memory search). Each named constructor
 /// builds one, so no parameter is ever silently inert on the wrong mode.
 sealed class ListSource<T extends Object> {
-  const new();
+  const ListSource();
 }

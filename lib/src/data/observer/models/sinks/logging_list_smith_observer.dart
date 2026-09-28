@@ -16,7 +16,7 @@ final class LoggingListSmithObserver extends ListSmithObserver {
   static const _severeLevel = 900;
 
   /// Creates it.
-  const new();
+  const LoggingListSmithObserver();
 
   @override
   void onPageLoaded(int pageIndex, int itemCount, {required bool isSearchMode}) => developer.log(

@@ -7,5 +7,5 @@ part 'policies/replace_cache_policy.dart';
 /// always starts clean.
 sealed class SearchCachePolicy {
   /// Const base constructor.
-  const new();
+  const SearchCachePolicy();
 }

@@ -11,7 +11,7 @@ final class SearchPageRequest extends PageRequest {
   final String query;
 
   /// Creates it.
-  const new({
+  const SearchPageRequest({
     required this.query,
     required super.pageIndex,
     required super.pageSize,

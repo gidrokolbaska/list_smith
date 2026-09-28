@@ -14,5 +14,5 @@ part 'searches/no_search.dart';
 /// only: a `.sync` list is search by definition and takes its predicate directly.
 sealed class Search<T extends Object> {
   /// Const base constructor.
-  const new();
+  const Search();
 }

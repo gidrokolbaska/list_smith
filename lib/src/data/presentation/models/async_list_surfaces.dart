@@ -28,7 +28,7 @@ class AsyncListSurfaces {
   final WidgetBuilder? noMoreItemsBuilder;
 
   /// Creates it. Every unset field keeps list_smith's neutral default.
-  const new({
+  const AsyncListSurfaces({
     this.firstPageLoadingBuilder,
     this.newPageLoadingBuilder,
     this.firstPageErrorBuilder,
