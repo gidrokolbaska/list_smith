@@ -8,31 +8,39 @@ import '/src/data/presentation/typedefs/item_builder.dart';
 ///
 /// Shared by both render paths, so header placement lives in one spot. Takes [groupOf] and [headerFor]
 /// directly rather than a whole `Grouping`, so it stays independent of the grouping model.
-class const GroupedItem<T extends Object>({
+class GroupedItem<T extends Object> extends StatelessWidget {
+  /// Creates it.
+  const GroupedItem({
+    required this.itemBuilder,
+    required this.groupOf,
+    required this.headerFor,
+    required this.scrollDirection,
+    required this.drawsHeader,
+    required this.item,
+    required this.index,
+    super.key,
+  });
+
   /// Builds the item itself.
-  required final ItemBuilder<T> itemBuilder,
+  final ItemBuilder<T> itemBuilder;
 
   /// Pulls an item's group key, to label the header.
-  required final GroupKeyOf<T, Object> groupOf,
+  final GroupKeyOf<T, Object> groupOf;
 
   /// Builds a group's header from its key.
-  required final GroupHeaderBuilder<Object> headerFor,
+  final GroupHeaderBuilder<Object> headerFor;
 
   /// The scroll axis, so the header stacks before the item along it.
-  required final Axis scrollDirection,
+  final Axis scrollDirection;
 
   /// Whether this item opens its group, and so draws the header.
-  required final bool drawsHeader,
+  final bool drawsHeader;
 
   /// The item to render.
-  required final T item,
+  final T item;
 
   /// Index into the flattened list, passed through to [itemBuilder].
-  required final int index,
-  super.key,
-}) extends StatelessWidget {
-  /// Creates it.
-  this;
+  final int index;
 
   @override
   Widget build(BuildContext context) => Flex(

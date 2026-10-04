@@ -44,55 +44,74 @@ import 'row_transitions_notifier.dart';
 
 /// The async engine behind [ListSmith.async]: owns the paging state and every fetch into it, wires
 /// pull-to-refresh, and runs feed and search as 2 views on that one state.
-class const AsyncListView<T extends Object>({
-  /// The fetchers, end policy and search cache policy.
-  required final AsyncSource<T> source,
+class AsyncListView<T extends Object> extends StatefulWidget {
+    /// The fetchers, end policy and search cache policy.
+   final AsyncSource<T> source;
 
   /// Builds the widget for each item.
-  required final ItemBuilder<T> itemBuilder,
+   final ItemBuilder<T> itemBuilder;
 
   /// Splits the visible items into sections. [NoGrouping] (the default) renders a flat list.
-  required final Grouping<T> grouping,
+   final Grouping<T> grouping;
 
   /// The current search query. Empty runs the feed, non-empty runs search.
-  required final String query,
+   final String query;
 
   /// Minimum trimmed query length before a search runs. Below it the query counts as empty.
-  required final int minSearchLength,
+   final int minSearchLength;
 
   /// How long to wait after [query] changes before it takes effect. [Duration.zero] is immediate.
-  required final Duration searchDebounce,
+   final Duration searchDebounce;
 
   /// The async-only override surfaces: page loading and error, end-of-list footer.
-  required final AsyncListSurfaces surfaces,
+   final AsyncListSurfaces surfaces;
 
   /// Scroll and layout configuration for the underlying scrollable.
-  required final ListScrollConfig scroll,
+   final ListScrollConfig scroll;
 
   /// Builds the separator between items. Null for none.
-  final IndexedWidgetBuilder? separatorBuilder,
+  final IndexedWidgetBuilder? separatorBuilder;
 
   /// Builds the surface shown when the source yields no items. Null uses the neutral default.
-  final WidgetBuilder? emptyBuilder,
+  final WidgetBuilder? emptyBuilder;
 
   /// Builds the surface shown when a search matches nothing. Null uses the neutral default.
-  final NoResultsBuilder? noResultsBuilder,
+  final NoResultsBuilder? noResultsBuilder;
 
   /// Lifecycle events for logging or telemetry. Null is silent.
-  final ListSmithObserver? observer,
+  final ListSmithObserver? observer;
 
   /// Refreshes this list from code. Null leaves refresh gesture-only.
-  final ListSmithController<T>? controller,
-  super.key,
-}) extends StatefulWidget {
+  final ListSmithController<T>? controller;
   /// Creates it.
-  this;
+ const AsyncListView({
+  required this. source,
+
+  required this. itemBuilder,
+
+  required this. grouping,
+
+  required this. query,
+
+  required this. minSearchLength,
+
+  required this.searchDebounce,
+
+  required this. surfaces,
+
+  required this.scroll,
+  this.separatorBuilder,
+  this.emptyBuilder,
+  this.noResultsBuilder,
+  this.observer,
+  this.controller,
+  super.key,});
 
   @override
   State<AsyncListView<T>> createState() => _AsyncListViewState<T>();
 }
 
-class _AsyncListViewState<T extends Object>()
+class _AsyncListViewState<T extends Object>
     extends State<AsyncListView<T>>
     with TickerProviderStateMixin
     implements ListSmithControllerHost<T> {

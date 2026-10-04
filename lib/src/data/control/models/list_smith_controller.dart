@@ -14,12 +14,12 @@ import 'list_smith_controller_host.dart';
 ///
 /// Intents only, never the pager or its state. Want to hear about events instead? That's [ListSmithObserver].
 /// Holds nothing, so there's nothing to dispose.
-class ListSmithController<T extends Object>() {
+class ListSmithController<T extends Object> {
   ListSmithControllerHost<T>? _host;
   var _wasEverAttached = false;
 
   /// Creates it.
-  this;
+  ListSmithController();
 
   /// Reloads exactly as a pull would, running the configured [Reload] ([ResetToFirstPage] when the list
   /// has no pull). While searching, it reloads the search.

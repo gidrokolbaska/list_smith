@@ -1,9 +1,9 @@
 part of '../grouping.dart';
 
 /// No grouping: a flat list, no section headers. The default.
-final class const NoGrouping<T extends Object>() extends Grouping<T> {
+final class  NoGrouping<T extends Object>() extends Grouping<T> {
   /// Creates it.
-  this;
+  const NoGrouping();
 
   @override
   @internal

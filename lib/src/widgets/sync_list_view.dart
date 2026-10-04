@@ -4,7 +4,6 @@ library;
 import 'package:flutter/widgets.dart';
 
 import '/src/data/grouping/models/grouping.dart';
-import '/src/data/presentation/extensions/list_scroll_config_resolver_extension.dart';
 import '/src/data/presentation/models/list_scroll_config.dart';
 import '/src/data/presentation/typedefs/item_builder.dart';
 import '/src/data/presentation/typedefs/no_results_builder.dart';
@@ -18,48 +17,65 @@ import 'defaults/neutral_no_results_indicator.dart';
 /// and renders it with a plain `ListView`.
 ///
 /// No paging controller and no pull-to-refresh, since in-memory data has nothing to page or refresh.
-class const SyncListView<T extends Object>({
+class SyncListView<T extends Object> extends StatefulWidget {
   /// The items and the predicate that filters them.
-  required final SyncSource<T> source,
+  final SyncSource<T> source;
 
   /// The current search query, yours to own and pass in.
-  required final String query,
+  final String query;
 
-  /// Minimum trimmed query length before a search runs. Below it the query counts as empty.
-  required final int minSearchLength,
+  /// Minimum trimmed query length before a search runs. Below it the query
+  /// counts as empty.
+  final int minSearchLength;
 
-  /// How long to wait after [query] changes before filtering. [Duration.zero] filters at once.
-  required final Duration searchDebounce,
+  /// How long to wait after [query] changes before filtering.
+  /// [Duration.zero] filters at once.
+  final Duration searchDebounce;
 
   /// Builds the widget for each item.
-  required final ItemBuilder<T> itemBuilder,
+  final ItemBuilder<T> itemBuilder;
 
-  /// Splits the visible items into sections. [NoGrouping] (the default) renders a flat list.
-  required final Grouping<T> grouping,
+  /// Splits the visible items into sections. [NoGrouping] (the default)
+  /// renders a flat list.
+  final Grouping<T> grouping;
 
   /// Scroll and layout configuration for the underlying scrollable.
-  required final ListScrollConfig scroll,
+  final ListScrollConfig scroll;
 
   /// Builds the separator between items. Null for none.
-  final IndexedWidgetBuilder? separatorBuilder,
+  final IndexedWidgetBuilder? separatorBuilder;
 
-  /// Builds the surface shown when the source has no items. Null uses the neutral default.
-  final WidgetBuilder? emptyBuilder,
+  /// Builds the surface shown when the source has no items. Null uses the
+  /// neutral default.
+  final WidgetBuilder? emptyBuilder;
 
-  /// Builds the surface shown when a search matches nothing. Null uses the neutral default.
-  final NoResultsBuilder? noResultsBuilder,
-  super.key,
-}) extends StatefulWidget {
-  /// Creates it.
-  this;
+  /// Builds the surface shown when a search matches nothing. Null uses the
+  /// neutral default.
+  final NoResultsBuilder? noResultsBuilder;
+
+  const SyncListView({
+    required this.source,
+    required this.query,
+    required this.minSearchLength,
+    required this.searchDebounce,
+    required this.itemBuilder,
+    required this.grouping,
+    required this.scroll,
+    this.separatorBuilder,
+    this.emptyBuilder,
+    this.noResultsBuilder,
+    super.key,
+  });
 
   @override
   State<SyncListView<T>> createState() => _SyncListViewState<T>();
 }
 
-class _SyncListViewState<T extends Object>() extends State<SyncListView<T>> {
+class _SyncListViewState<T extends Object> extends State<SyncListView<T>> {
   late final _debouncer = QueryDebouncer(onCommitted: _onQueryCommitted);
+
   late final ValueNotifier<({List<T> visibleItems, bool isSearching})> _resultNotifier;
+
   late List<T> _items;
 
   @override
@@ -76,19 +92,24 @@ class _SyncListViewState<T extends Object>() extends State<SyncListView<T>> {
     super.didUpdateWidget(oldWidget);
 
     final didItemsChange = !identical(widget.source.items, oldWidget.source.items);
-    if (didItemsChange) _items = widget.source.items.toList(growable: false);
+
+    if (didItemsChange) {
+      _items = widget.source.items.toList(growable: false);
+    }
+
     if (didItemsChange || !identical(widget.grouping, oldWidget.grouping)) {
       _resultNotifier.value = _resolve();
     }
 
-    if (widget.query != oldWidget.query) _debouncer.schedule(widget.query, widget.searchDebounce);
+    if (widget.query != oldWidget.query) {
+      _debouncer.schedule(widget.query, widget.searchDebounce);
+    }
   }
 
   @override
   void dispose() {
     _debouncer.dispose();
     _resultNotifier.dispose();
-
     super.dispose();
   }
 
@@ -106,7 +127,9 @@ class _SyncListViewState<T extends Object>() extends State<SyncListView<T>> {
     );
   }
 
-  void _onQueryCommitted(String committedQuery) => _resultNotifier.value = _resolve();
+  void _onQueryCommitted(String committedQuery) {
+    _resultNotifier.value = _resolve();
+  }
 
   @override
   Widget build(BuildContext context) => ValueListenableBuilder(
@@ -138,7 +161,7 @@ class _SyncListViewState<T extends Object>() extends State<SyncListView<T>> {
               controller: scroll.controller,
               physics: scroll.physics,
               padding: scroll.padding,
-              scrollCacheExtent: scroll.scrollCacheExtent,
+              cacheExtent: scroll.cacheExtent,
               itemCount: visibleItems.length,
               itemBuilder: (context, index) =>
                   effectiveItemBuilder(context, visibleItems[index], index),
@@ -150,7 +173,7 @@ class _SyncListViewState<T extends Object>() extends State<SyncListView<T>> {
               controller: scroll.controller,
               physics: scroll.physics,
               padding: scroll.padding,
-              scrollCacheExtent: scroll.scrollCacheExtent,
+              cacheExtent: scroll.cacheExtent,
               itemCount: visibleItems.length,
               itemBuilder: (context, index) =>
                   effectiveItemBuilder(context, visibleItems[index], index),

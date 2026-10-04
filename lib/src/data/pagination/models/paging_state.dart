@@ -7,21 +7,21 @@ import 'loaded_page.dart';
 ///
 /// Compared by identity, so every write is a change a listener sees.
 @immutable
-final class const PagingState<T extends Object>({
+final class PagingState<T extends Object> {
   /// The pages loaded so far, in order, so page `i` sits at index `i`. Null until the 1st one lands.
-  final List<LoadedPage<T>>? pages,
+  final List<LoadedPage<T>>? pages;
 
   /// What the last page fetch threw. Only [failed] sets it.
-  final Exception? error,
+  final Exception? error;
 
   /// Whether the source may have more pages.
-  final bool hasNextPage = true,
+  final bool hasNextPage;
 
   /// Whether a page fetch is on its way.
-  final bool isLoading = false,
-}) {
+  final bool isLoading;
+
   /// Creates it.
-  this;
+  const PagingState({this.pages, this.error, this.hasNextPage = true, this.isLoading = false});
 
   /// The surface to show. Counts pages instead of flattening them, so it stays O(pages).
   PagingStatus get status {

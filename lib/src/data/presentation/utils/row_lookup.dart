@@ -7,17 +7,17 @@ import '/src/data/pagination/typedefs/item_id_getter.dart';
 ///
 /// A row is looked for at the index it was last built at, so rows that didn't move cost a check each.
 /// The 1st row that did move builds an id-to-index map, and the rest of the build reuses it.
-final class RowLookup<T extends Object>(
-  final List<LoadedPage<T>> _pages,
-  final ItemIdGetter<T> _itemIdGetter,
-) {
+final class RowLookup<T extends Object> {
+  final List<LoadedPage<T>> _pages;
+  final ItemIdGetter<T> _itemIdGetter;
+
   /// Where each page starts in the flat list, then the total, so reading by index needs no flatten.
   late final List<int> _pageStarts = _startsOfPages();
 
   late final Map<Object, int> _indexById = _mapIds();
 
   /// Creates it over one build's pages.
-  this;
+  RowLookup(this._pages, this._itemIdGetter);
 
   /// How many items the pages hold.
   int get itemCount => _pageStarts.last;

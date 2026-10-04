@@ -5,15 +5,15 @@ part of '../list_source.dart';
 /// Nothing to paginate or pull over in-memory data, so [searchBy] is required. [items] stays the raw
 /// iterable you passed, turned into a list once downstream, so the widget can tell an unchanged list
 /// from a new one and skip re-filtering.
-final class const SyncSource<T extends Object>({
+final class SyncSource<T extends Object> extends ListSource<T> {
   /// The items to search over, exactly as you passed them.
-  required final Iterable<T> items,
+  final Iterable<T> items;
 
   /// Decides whether an item matches the current query.
-  required final SyncSearchPredicate<T> searchBy,
-}) extends ListSource<T> {
+  final SyncSearchPredicate<T> searchBy;
+
   /// Creates it.
-  this;
+  const SyncSource({required this.items, required this.searchBy});
 
   @override
   String toString() => 'SyncSource()';

@@ -5,13 +5,13 @@ import 'package:meta/meta.dart';
 ///
 /// A class rather than a record, since a record costs the de-dup pass about half again.
 @immutable
-final class const LoadedPage<T extends Object>({
+final class LoadedPage<T extends Object> {
   /// The items, as the server sent them.
-  required final List<T> items,
+  final List<T> items;
 
   /// The edit counter when this page's fetch went out.
-  required final int readStamp,
-}) {
+  final int readStamp;
+
   /// Creates it.
-  this;
+  const LoadedPage({required this.items, required this.readStamp});
 }

@@ -19,24 +19,32 @@ typedef PagedSurfaces = ({
 
 /// The async list: [state]'s rows, or the surface its status calls for. A row follows its item, so
 /// when rows above it come or go, it keeps its state and anything it's animating.
-class const KeyedPagedListView<T extends Object>({
-  /// What renders, edits and de-dup already applied.
-  required final PagingState<T> state,
+class  KeyedPagedListView<T extends Object> extends BoxScrollView {
+   /// What renders, edits and de-dup already applied.
+   final PagingState<T> state;
 
   /// Builds each row.
-  required final ItemBuilder<T> itemBuilder,
+   final ItemBuilder<T> itemBuilder;
 
   /// Keys each row, so the list finds it again after a shift.
-  required final ItemIdGetter<T> itemIdGetter,
+   final ItemIdGetter<T> itemIdGetter;
 
   /// What shows instead of the rows, or after them.
-  required final PagedSurfaces surfaces,
+   final PagedSurfaces surfaces;
 
   /// Asks for the next page. Called while a row near the end builds.
-  required final VoidCallback onNearEnd,
+   final VoidCallback onNearEnd;
 
   /// Builds separators between items. Null for none.
-  final IndexedWidgetBuilder? separatorBuilder,
+  final IndexedWidgetBuilder? separatorBuilder;
+  /// Creates it.
+  const KeyedPagedListView({
+  required this. state,
+  required this.itemBuilder,
+  required this. itemIdGetter,
+  required this.surfaces,
+  required this. onNearEnd,
+  this. separatorBuilder,
   super.controller,
   super.scrollDirection,
   super.reverse,
@@ -44,9 +52,7 @@ class const KeyedPagedListView<T extends Object>({
   super.padding,
   super.scrollCacheExtent,
   super.key,
-}) extends BoxScrollView {
-  /// Creates it.
-  this;
+});
 
   @override
   Widget buildChildLayout(BuildContext context) {

@@ -1,9 +1,9 @@
 part of '../search.dart';
 
 /// No async search: a plain paginated feed. The default. Pass an [AsyncSearch] to turn search on.
-final class const NoSearch() extends Search<Never> {
+final class NoSearch extends Search<Never> {
   /// Creates it.
-  this;
+  const NoSearch();
 
   @override
   String toString() => 'NoSearch()';
