@@ -3,9 +3,9 @@ import 'package:flutter/widgets.dart';
 import '/src/utils/neutral_theme.dart';
 
 /// The neutral surface for a source with no items at all. Override `emptyBuilder` to replace it.
-class const NeutralEmptyIndicator({super.key}) extends StatelessWidget {
+class NeutralEmptyIndicator extends StatelessWidget {
   /// Creates it.
-  this;
+  const NeutralEmptyIndicator({super.key});
 
   @override
   Widget build(BuildContext context) => Center(

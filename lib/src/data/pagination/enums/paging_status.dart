@@ -2,7 +2,7 @@
 library;
 
 /// Which surface an async list shows, read off its [PagingState].
-enum PagingStatus() {
+enum PagingStatus {
   /// No page yet and none failed, so the 1st one is on its way.
   loadingFirstPage,
 
@@ -19,5 +19,7 @@ enum PagingStatus() {
   subsequentPageError,
 
   /// Rows to show, and the source has no more.
-  completed,
+  completed;
+
+  const PagingStatus();
 }

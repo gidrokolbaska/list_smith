@@ -5,9 +5,9 @@ part of '../pagination_end_policy.dart';
 /// Needs a `withSignal` fetcher whose signal is that bool. Stopping on the flag saves the trailing empty
 /// page a count-based policy has to fetch to find the end. For a next-cursor source reach for [StopOnNullSignalPolicy]
 /// instead.
-final class const ExplicitHasMorePolicy() extends PaginationEndPolicy {
+final class ExplicitHasMorePolicy extends PaginationEndPolicy {
   /// Creates it.
-  this;
+  const ExplicitHasMorePolicy();
 
   @override
   bool hasReachedEnd(EndContext context) => context.lastPageSignal == false;

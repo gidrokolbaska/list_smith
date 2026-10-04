@@ -5,9 +5,9 @@ part of '../search_cache_policy.dart';
 ///
 /// Reach for it when a fresh load each way is fine, or when coming back should pick up changes the list
 /// was never told about.
-final class const ReplaceCachePolicy() extends SearchCachePolicy {
+final class ReplaceCachePolicy extends SearchCachePolicy {
   /// Creates it.
-  this;
+  const ReplaceCachePolicy();
 
   @override
   String toString() => 'ReplaceCachePolicy()';

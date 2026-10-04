@@ -15,9 +15,9 @@ part 'refreshes/pull_to_refresh.dart';
 ///
 /// [PullToRefresh] (the default) is on, [NoRefresh] is off. The indicator rides the on-case, so it can't
 /// be set on a list that never refreshes. [ListSmith.async] only.
-sealed class const Refresh() {
+sealed class Refresh {
   /// Const base constructor.
-  this;
+  const Refresh();
 
   /// The same on every surface, since swapping physics mid-drag cancels the drag.
   @internal

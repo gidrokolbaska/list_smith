@@ -14,9 +14,9 @@ part 'empty_page_behaviours/show_empty_surface.dart';
 /// [ShowEmptySurface] (the default) shows the empty surface. [AdvanceToFirstNonEmpty] pages on to the
 /// 1st page with items, which only matters under a policy that continues past an empty page: a raised
 /// [StopOnEmptyPagesPolicy.emptyRunBeforeEnd] or a signal policy. [ListSmith.async] only.
-sealed class const EmptyPageBehaviour() {
+sealed class EmptyPageBehaviour {
   /// Const base constructor.
-  this;
+  const EmptyPageBehaviour();
 
   /// Whether to page past the current empty page. Called after each page lands.
   bool shouldAdvance(EmptyPageContext context);

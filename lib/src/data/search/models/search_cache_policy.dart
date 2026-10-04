@@ -5,7 +5,7 @@ part 'policies/replace_cache_policy.dart';
 ///
 /// [ReplaceCachePolicy] is the default. Only that boundary, so a change between 2 different queries
 /// always starts clean.
-sealed class const SearchCachePolicy() {
+sealed class SearchCachePolicy {
   /// Const base constructor.
-  this;
+  const SearchCachePolicy();
 }

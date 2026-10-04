@@ -5,19 +5,19 @@ library;
 /// What a [PaginationEndPolicy] sees when deciding whether an async list has run out of data.
 ///
 /// Rebuilt after each page lands, so a policy stays a pure function of its input.
-final class const EndContext({
+final class EndContext {
   /// The item count of each page fetched so far, in fetch order.
-  required final List<int> pageItemCounts,
+  final List<int> pageItemCounts;
 
   /// The page size the list was configured with.
-  required final int pageSize,
+  final int pageSize;
 
   /// The end signal the last page's fetcher reported. `null` for a plain [PageFetcher.new], or before
   /// the 1st page.
-  final Object? lastPageSignal,
-}) {
+  final Object? lastPageSignal;
+
   /// Creates it.
-  this;
+  const EndContext({required this.pageItemCounts, required this.pageSize, this.lastPageSignal});
 
   /// How many pages have been fetched so far.
   int get pageCount => pageItemCounts.length;

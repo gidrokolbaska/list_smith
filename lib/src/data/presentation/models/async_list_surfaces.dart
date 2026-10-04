@@ -1,3 +1,5 @@
+// ignore_for_file: public_member_api_docs
+
 /// @docImport '/src/data/refresh/models/refresh.dart';
 library;
 
@@ -11,22 +13,31 @@ import '../typedefs/error_builder.dart';
 /// for a house style. The pull indicator lives on [PullToRefresh] instead, and the empty state sits
 /// on the constructor, since every list has one.
 @immutable
-final class const AsyncListSurfaces({
+final class AsyncListSurfaces {
+  const AsyncListSurfaces({
+    this.firstPageLoadingBuilder,
+
+    this.newPageLoadingBuilder,
+
+    this.firstPageErrorBuilder,
+
+    this.newPageErrorBuilder,
+
+    this.noMoreItemsBuilder,
+  });
+
   /// Builds the first-page loading surface. It fills the visible list and never scrolls.
-  final WidgetBuilder? firstPageLoadingBuilder,
+  final WidgetBuilder? firstPageLoadingBuilder;
 
   /// Builds the loading footer shown while a further page loads.
-  final WidgetBuilder? newPageLoadingBuilder,
+  final WidgetBuilder? newPageLoadingBuilder;
 
   /// Builds the first-page error surface, with the error and a retry callback.
-  final ErrorBuilder? firstPageErrorBuilder,
+  final ErrorBuilder? firstPageErrorBuilder;
 
   /// Builds the new-page error footer, with the error and a retry callback.
-  final ErrorBuilder? newPageErrorBuilder,
+  final ErrorBuilder? newPageErrorBuilder;
 
   /// Builds the footer shown once every page has loaded.
-  final WidgetBuilder? noMoreItemsBuilder,
-}) {
-  /// Creates it. Every unset field keeps list_smith's neutral default.
-  this;
+  final WidgetBuilder? noMoreItemsBuilder;
 }

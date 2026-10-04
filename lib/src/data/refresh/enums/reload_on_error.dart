@@ -5,7 +5,7 @@ library;
 ///
 /// Index-based sources only. A `withSignal` source reloads in order and is always atomic, since a broken
 /// cursor chain can't be half-committed, so this is ignored there.
-enum ReloadOnError() {
+enum ReloadOnError {
   /// Keep every page that reloaded and leave the rest as they were. Best-effort, the default.
   ///
   /// A stale page beside fresh neighbours can seam: de-dup by id drops the duplicates, gaps heal on
@@ -14,5 +14,7 @@ enum ReloadOnError() {
 
   /// Commit only if every page reloads. On any failure keep the old data and report the error, so the
   /// list never mixes fresh and stale pages.
-  allOrNothing,
+  allOrNothing;
+
+  const ReloadOnError();
 }

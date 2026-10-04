@@ -9,9 +9,9 @@ part of '../search_cache_policy.dart';
 /// - a page still loading when the search started is dropped and asked again
 /// - a pull, `refresh()` or `invalidate()` while searching re-reads it in place on the way back
 /// - a `reset()` while searching drops it, so it starts over
-final class const KeepCachePolicy() extends SearchCachePolicy {
+final class KeepCachePolicy extends SearchCachePolicy {
   /// Creates it.
-  this;
+  const KeepCachePolicy();
 
   @override
   String toString() => 'KeepCachePolicy()';

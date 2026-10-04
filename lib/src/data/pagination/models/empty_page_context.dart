@@ -5,16 +5,23 @@ library;
 /// What an [EmptyPageBehaviour] sees when deciding whether to page past an empty page.
 ///
 /// Rebuilt after each page lands, so a behaviour stays a pure function of its input.
-final class const EmptyPageContext({
+final class EmptyPageContext {
   /// Whether the list shows no items, counted after de-duplication and your edits.
-  required final bool isEmpty,
+  final bool isEmpty;
 
   /// Whether [PaginationEndPolicy] reports another page left to fetch.
-  required final bool isMoreAvailable,
+  final bool isMoreAvailable;
 
   /// How many pages have been fetched so far.
-  required final int pagesLoaded,
-}) {
+  final int pagesLoaded;
+
   /// Creates it.
-  this;
+  const EmptyPageContext({
+    required this.isEmpty,
+
+    required this.isMoreAvailable,
+
+    /// How many pages have been fetched so far.
+    required this.pagesLoaded,
+  });
 }

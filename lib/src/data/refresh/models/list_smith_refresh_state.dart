@@ -7,19 +7,23 @@ import '../enums/list_smith_refresh_phase.dart';
 /// Just the [phase], drag [value] and [pullDirection] a custom indicator needs, so the mechanism underneath
 /// stays swappable.
 @immutable
-final class const ListSmithRefreshState({
+final class ListSmithRefreshState {
   /// Where the gesture currently is.
-  required final ListSmithRefreshPhase phase,
+  final ListSmithRefreshPhase phase;
 
   /// Pull progress: `0.0` as the pull starts, `1.0` at the threshold that arms a refresh, more than `1.0`
   /// while over-pulled.
-  required final double value,
+  final double value;
 
   /// Which way the pull travels: `down` for a list pulled from its top, `up` when it's reversed.
-  final AxisDirection pullDirection = .down,
-}) {
+  final AxisDirection pullDirection;
+
   /// Creates it.
-  this;
+  const ListSmithRefreshState({
+    required this.phase,
+    required this.value,
+    this.pullDirection = .down,
+  });
 
   @override
   String toString() =>
@@ -38,7 +42,5 @@ final class const ListSmithRefreshState({
 }
 
 /// Draws the pull indicator. Only called mid-pull, and list_smith decides where it sits.
-typedef RefreshIndicatorBuilder = Widget Function(
-  BuildContext context,
-  ListSmithRefreshState state,
-);
+typedef RefreshIndicatorBuilder =
+    Widget Function(BuildContext context, ListSmithRefreshState state);

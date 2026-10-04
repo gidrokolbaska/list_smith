@@ -11,11 +11,12 @@ part 'edit_transitions/no_edit_transition.dart';
 /// [NoEditTransition] (the default) shows an edit at once. [EditTransition.new] animates the row an
 /// `upsert` adds and the row a `remove` takes, and nothing else, so page loads and reloads never do.
 /// [ListSmith.async] only, like the edits.
-sealed class const EditTransition._() {
+sealed class EditTransition {
   /// [transitionBuilder] wraps the row, run forward for one coming in and in reverse for one going out, so
   /// `AnimatedSwitcher.defaultTransitionBuilder` drops straight in.
-  const factory({
+  const factory EditTransition({
     required Duration duration,
     required AnimatedSwitcherTransitionBuilder transitionBuilder,
   }) = AnimatedEditTransition._;
+  const EditTransition._();
 }

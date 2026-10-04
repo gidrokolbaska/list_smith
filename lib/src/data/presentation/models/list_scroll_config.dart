@@ -4,28 +4,40 @@ import 'package:flutter/widgets.dart';
 ///
 /// A subset of [ScrollView] / [BoxScrollView], each field keeping the framework's own default.
 @immutable
-final class const ListScrollConfig({
+final class ListScrollConfig {
   /// Maps to [BoxScrollView.padding].
-  final EdgeInsetsGeometry? padding,
+  final EdgeInsetsGeometry? padding;
 
   /// Maps to [ScrollView.physics]. Under pull-to-refresh the list is always draggable, so short content
   /// takes a pull, unless these physics refuse drags.
-  final ScrollPhysics? physics,
+  final ScrollPhysics? physics;
 
   /// Maps to [ScrollView.controller], for a scroll controller you own.
-  final ScrollController? controller,
+  final ScrollController? controller;
 
   /// Maps to [ScrollView.reverse].
-  final bool reverse = false,
+  final bool reverse;
 
   /// Maps to [ScrollView.scrollDirection].
-  final Axis scrollDirection = .vertical,
+  final Axis scrollDirection;
 
   /// The viewport cache extent, in logical pixels.
-  final double? cacheExtent,
-}) {
+  final double? cacheExtent;
+
   /// Creates it.
-  this;
+  const ListScrollConfig({
+    this.padding,
+
+    this.physics,
+
+    this.controller,
+
+    this.reverse = false,
+
+    this.scrollDirection = .vertical,
+
+    this.cacheExtent,
+  });
 
   @override
   String toString() =>

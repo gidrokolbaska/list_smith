@@ -6,16 +6,14 @@ import '/src/utils/neutral_theme.dart';
 ///
 /// The widgets layer ships no button, so this hand-rolls one. Internal: restyling means overriding the
 /// error builder wholesale, not this.
-class const NeutralRetryButton({
+class NeutralRetryButton extends StatelessWidget {
   /// Runs on tap, to re-attempt the failed load.
-  required final VoidCallback onRetry,
-  super.key,
-}) extends StatelessWidget {
+  final VoidCallback onRetry;
   static const _padding = EdgeInsets.symmetric(horizontal: 16, vertical: 8);
   static const _radius = BorderRadius.all(.circular(8));
 
   /// Creates it.
-  this;
+  const NeutralRetryButton({required this.onRetry, super.key});
 
   @override
   Widget build(BuildContext context) {
