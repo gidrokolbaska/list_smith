@@ -18,6 +18,8 @@ analyzer:
     - linux/**
     # Its own package, analysed by bench-app.yml. APPENDIX.md#root-analysis-skips-bench-app
     - benchmark/app/**
+  enable-experiment:
+    - primary-constructors
   language:
     strict-casts: true
     strict-inference: true
@@ -313,7 +315,6 @@ linter:
     use_late_for_private_fields_and_variables: true
     use_named_constants: true
     use_null_aware_elements: true
-    use_primary_constructors: true
     use_raw_strings: true
     use_rethrow_when_possible: true
     use_setters_to_change_properties: true
