@@ -45,29 +45,29 @@ import 'row_transitions_notifier.dart';
 /// The async engine behind [ListSmith.async]: owns the paging state and every fetch into it, wires
 /// pull-to-refresh, and runs feed and search as 2 views on that one state.
 class AsyncListView<T extends Object> extends StatefulWidget {
-    /// The fetchers, end policy and search cache policy.
-   final AsyncSource<T> source;
+  /// The fetchers, end policy and search cache policy.
+  final AsyncSource<T> source;
 
   /// Builds the widget for each item.
-   final ItemBuilder<T> itemBuilder;
+  final ItemBuilder<T> itemBuilder;
 
   /// Splits the visible items into sections. [NoGrouping] (the default) renders a flat list.
-   final Grouping<T> grouping;
+  final Grouping<T> grouping;
 
   /// The current search query. Empty runs the feed, non-empty runs search.
-   final String query;
+  final String query;
 
   /// Minimum trimmed query length before a search runs. Below it the query counts as empty.
-   final int minSearchLength;
+  final int minSearchLength;
 
   /// How long to wait after [query] changes before it takes effect. [Duration.zero] is immediate.
-   final Duration searchDebounce;
+  final Duration searchDebounce;
 
   /// The async-only override surfaces: page loading and error, end-of-list footer.
-   final AsyncListSurfaces surfaces;
+  final AsyncListSurfaces surfaces;
 
   /// Scroll and layout configuration for the underlying scrollable.
-   final ListScrollConfig scroll;
+  final ListScrollConfig scroll;
 
   /// Builds the separator between items. Null for none.
   final IndexedWidgetBuilder? separatorBuilder;
@@ -83,36 +83,37 @@ class AsyncListView<T extends Object> extends StatefulWidget {
 
   /// Refreshes this list from code. Null leaves refresh gesture-only.
   final ListSmithController<T>? controller;
+
   /// Creates it.
- const AsyncListView({
-  required this. source,
+  const AsyncListView({
+    required this.source,
 
-  required this. itemBuilder,
+    required this.itemBuilder,
 
-  required this. grouping,
+    required this.grouping,
 
-  required this. query,
+    required this.query,
 
-  required this. minSearchLength,
+    required this.minSearchLength,
 
-  required this.searchDebounce,
+    required this.searchDebounce,
 
-  required this. surfaces,
+    required this.surfaces,
 
-  required this.scroll,
-  this.separatorBuilder,
-  this.emptyBuilder,
-  this.noResultsBuilder,
-  this.observer,
-  this.controller,
-  super.key,});
+    required this.scroll,
+    this.separatorBuilder,
+    this.emptyBuilder,
+    this.noResultsBuilder,
+    this.observer,
+    this.controller,
+    super.key,
+  });
 
   @override
   State<AsyncListView<T>> createState() => _AsyncListViewState<T>();
 }
 
-class _AsyncListViewState<T extends Object>
-    extends State<AsyncListView<T>>
+class _AsyncListViewState<T extends Object> extends State<AsyncListView<T>>
     with TickerProviderStateMixin
     implements ListSmithControllerHost<T> {
   late final _debouncer = QueryDebouncer(onCommitted: _onQueryCommitted);
@@ -725,30 +726,34 @@ class _AsyncListViewState<T extends Object>
 ///
 /// One per run rather than the State itself, so a run knows its own facts: the trigger its pages
 /// report, and whether the list moved on since it began.
-final class _ReloadRun<T extends Object>(
-  final _AsyncListViewState<T> _engine,
+final class _ReloadRun<T extends Object> implements ReloadContext<T> {
+  final _AsyncListViewState<T> _engine;
 
   /// What every page fetched through this run reports.
-  final FetchTrigger trigger,
-) implements ReloadContext<T> {
+  final FetchTrigger trigger;
+
   final _doneCompleter = Completer<void>();
   final _handOverCompleter = Completer<void>();
 
-  /// The generation this run belongs to. Its own writes move it along, so only another writer can make
-  /// it stale.
-  int _epoch = _engine._generation;
+  /// The generation this run belongs to. Its own writes move it along, so only
+  /// another writer can make it stale.
+  int _epoch;
 
-  /// Booked by a caller that met this run live and must not be lost. Runs once this one is done.
+  /// Booked by a caller that met this run live and must not be lost. Runs once
+  /// this one is done.
   FetchTrigger? rerunTrigger;
 
-  /// Completes once the run finishes, committed or not, after the engine has let go of it.
+  /// Completes once the run finishes, committed or not, after the engine has
+  /// let go of it.
   Future<void> get doneFuture => _doneCompleter.future;
 
-  /// Completes once the list shows this run's result or its own loader, whichever comes 1st.
+  /// Completes once the list shows this run's result or its own loader,
+  /// whichever comes 1st.
   Future<void> get handOverFuture => _handOverCompleter.future;
 
-  /// What a caller asked of this run that cutting it off would lose: a booked rerun, or the run itself
-  /// when a caller asked for it. A 1st-page load the engine started is nobody's ask.
+  /// What a caller asked of this run that cutting it off would lose: a booked
+  /// rerun, or the run itself when a caller asked for it. A 1st-page load the
+  /// engine started is nobody's ask.
   FetchTrigger? get pendingAsk => switch (trigger) {
     .refresh || .invalidated => _stronger(rerunTrigger, trigger),
     .initialLoad || .nextPage || .retry || .queryChanged => rerunTrigger,
@@ -782,9 +787,11 @@ final class _ReloadRun<T extends Object>(
   @override
   void commit(List<List<T>> pages, {Object? lastSignal}) {
     if (isStale) return;
+
     final startPages = _startState?.pages ?? const [];
-    // A page whose re-fetch failed is the old one, handed back as is, so it keeps its old stamp. Every
-    // other page came through [fetch].
+
+    // A page whose re-fetch failed is the old one, handed back as is, so it
+    // keeps its old stamp. Every other page came through [fetch].
     final committedPages = pages
         .mapIndexed(
           (index, items) => index < startPages.length && identical(items, startPages[index].items)
@@ -792,14 +799,18 @@ final class _ReloadRun<T extends Object>(
               : LoadedPage(items: items, readStamp: _readStamps[index]!),
         )
         .toList(growable: false);
+
     _engine._commit(committedPages, lastSignal: lastSignal);
+
     _epoch = _engine._generation;
   }
 
   @override
   Future<void> reset() {
     final firstPageFuture = _engine._resetPaging(trigger);
+
     _epoch = _engine._generation;
+
     _handOver(); // the loader shows from here
 
     return firstPageFuture;
@@ -812,22 +823,33 @@ final class _ReloadRun<T extends Object>(
   }
 
   void _handOver() {
-    if (!_handOverCompleter.isCompleted) _handOverCompleter.complete();
+    if (!_handOverCompleter.isCompleted) {
+      _handOverCompleter.complete();
+    }
   }
+
+  _ReloadRun(this._engine, this.trigger) : _epoch = _engine._generation;
 }
 
-/// The normal-mode stream parked while searching, put back as it was when the query clears.
-final class _NormalSnapshot<T extends Object>({
-  required final PagingState<T> state,
+/// The normal-mode stream parked while searching, put back as it was when the
+/// query clears.
+final class _NormalSnapshot<T extends Object> {
+  final PagingState<T> state;
 
-  /// The stream's last end signal, restored with [state] so a signal policy reads its own.
-  required final Object? signal,
+  /// The stream's last end signal, restored with [state] so a signal policy
+  /// reads its own.
+  final Object? signal;
 
   /// An ask made while the feed sat here, paid by a re-read once it is put back.
-  var FetchTrigger? debt,
-}) {
-  /// Books [trigger] against the feed. A refresh is never downgraded to a re-read.
-  void owe(FetchTrigger trigger) => debt = _stronger(debt, trigger);
+  FetchTrigger? debt;
+
+  _NormalSnapshot({required this.state, required this.signal, this.debt});
+
+  /// Books [trigger] against the feed. A refresh is never downgraded to a
+  /// re-read.
+  void owe(FetchTrigger trigger) {
+    debt = _stronger(debt, trigger);
+  }
 }
 
 /// What renders, and the ids in it.

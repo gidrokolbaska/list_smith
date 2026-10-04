@@ -18,7 +18,7 @@ part 'groupings/no_grouping.dart';
 ///
 /// [NoGrouping] (the default) is flat, no headers. [Grouping.by] turns sections on. Both [ListSmith]
 /// constructors take one.
-sealed class const Grouping<T extends Object> {
+sealed class Grouping<T extends Object> {
   /// Const base constructor.
   const Grouping();
 

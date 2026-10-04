@@ -19,40 +19,41 @@ typedef PagedSurfaces = ({
 
 /// The async list: [state]'s rows, or the surface its status calls for. A row follows its item, so
 /// when rows above it come or go, it keeps its state and anything it's animating.
-class  KeyedPagedListView<T extends Object> extends BoxScrollView {
-   /// What renders, edits and de-dup already applied.
-   final PagingState<T> state;
+class KeyedPagedListView<T extends Object> extends BoxScrollView {
+  /// What renders, edits and de-dup already applied.
+  final PagingState<T> state;
 
   /// Builds each row.
-   final ItemBuilder<T> itemBuilder;
+  final ItemBuilder<T> itemBuilder;
 
   /// Keys each row, so the list finds it again after a shift.
-   final ItemIdGetter<T> itemIdGetter;
+  final ItemIdGetter<T> itemIdGetter;
 
   /// What shows instead of the rows, or after them.
-   final PagedSurfaces surfaces;
+  final PagedSurfaces surfaces;
 
   /// Asks for the next page. Called while a row near the end builds.
-   final VoidCallback onNearEnd;
+  final VoidCallback onNearEnd;
 
   /// Builds separators between items. Null for none.
   final IndexedWidgetBuilder? separatorBuilder;
+
   /// Creates it.
   const KeyedPagedListView({
-  required this. state,
-  required this.itemBuilder,
-  required this. itemIdGetter,
-  required this.surfaces,
-  required this. onNearEnd,
-  this. separatorBuilder,
-  super.controller,
-  super.scrollDirection,
-  super.reverse,
-  super.physics,
-  super.padding,
-  super.scrollCacheExtent,
-  super.key,
-});
+    required this.state,
+    required this.itemBuilder,
+    required this.itemIdGetter,
+    required this.surfaces,
+    required this.onNearEnd,
+    this.separatorBuilder,
+    super.controller,
+    super.scrollDirection,
+    super.reverse,
+    super.physics,
+    super.padding,
+    super.cacheExtent,
+    super.key,
+  });
 
   @override
   Widget buildChildLayout(BuildContext context) {
@@ -92,16 +93,23 @@ class  KeyedPagedListView<T extends Object> extends BoxScrollView {
 }
 
 /// Wins drags along [axis] that start on [child], so the list stays still. Only works inside the list.
-class const _DragAbsorber({required final Axis axis, required final Widget child})
-    extends StatelessWidget {
+class _DragAbsorber extends StatelessWidget {
+  final Axis axis;
+  final Widget child;
+
+  const _DragAbsorber({required this.axis, required this.child});
+
   @override
   Widget build(BuildContext context) => GestureDetector(
     onVerticalDragStart: axis != .vertical ? null : _ignore,
     onHorizontalDragStart: axis != .horizontal ? null : _ignore,
+
     // Opaque, so the gaps around a small loader count too.
     behavior: .opaque,
+
     // So a screen reader doesn't offer to scroll it.
     excludeFromSemantics: true,
+
     child: child,
   );
 
@@ -110,15 +118,25 @@ class const _DragAbsorber({required final Axis axis, required final Widget child
   static void _ignore(DragStartDetails _) {}
 }
 
-/// The sliver: the rows, keyed, then the footer as one more cell, so separators fall before it too.
-class const _KeyedRows<T extends Object>({
-  required final RowLookup<T> rowLookup,
-  required final ItemIdGetter<T> itemIdGetter,
-  required final ItemBuilder<T> itemBuilder,
-  required final WidgetBuilder footerBuilder,
-  required final IndexedWidgetBuilder? separatorBuilder,
-  required final VoidCallback? onNearEnd,
-}) extends StatelessWidget {
+/// The sliver: the rows, keyed, then the footer as one more cell, so separators
+/// fall before it too.
+class _KeyedRows<T extends Object> extends StatelessWidget {
+  final RowLookup<T> rowLookup;
+  final ItemIdGetter<T> itemIdGetter;
+  final ItemBuilder<T> itemBuilder;
+  final WidgetBuilder footerBuilder;
+  final IndexedWidgetBuilder? separatorBuilder;
+  final VoidCallback? onNearEnd;
+
+  const _KeyedRows({
+    required this.rowLookup,
+    required this.itemIdGetter,
+    required this.itemBuilder,
+    required this.footerBuilder,
+    required this.separatorBuilder,
+    required this.onNearEnd,
+  });
+
   @override
   Widget build(BuildContext context) {
     final cellCount = rowLookup.itemCount + 1;
@@ -140,9 +158,15 @@ class const _KeyedRows<T extends Object>({
 
   Widget _buildCell(BuildContext context, int index) {
     final itemCount = rowLookup.itemCount;
-    if (index >= itemCount) return footerBuilder(context);
 
-    if (index >= math.max(0, itemCount - 1 - _nearEndRows)) onNearEnd?.call();
+    if (index >= itemCount) {
+      return footerBuilder(context);
+    }
+
+    if (index >= math.max(0, itemCount - 1 - _nearEndRows)) {
+      onNearEnd?.call();
+    }
+
     final item = rowLookup.itemAt(index);
 
     return KeyedSubtree(
@@ -157,9 +181,14 @@ class const _KeyedRows<T extends Object>({
   static const _nearEndRows = 3;
 }
 
-/// A row's item id, plus where it was built as a lookup hint. Equal on the id alone, so a row that
-/// moved is still the same row.
-final class const _RowKey(final Object id, final int index) extends LocalKey {
+/// A row's item id, plus where it was built as a lookup hint. Equal on the id
+/// alone, so a row that moved is still the same row.
+final class _RowKey extends LocalKey {
+  final Object id;
+  final int index;
+
+  const _RowKey(this.id, this.index);
+
   @override
   bool operator ==(Object other) => other is _RowKey && other.id == id;
 

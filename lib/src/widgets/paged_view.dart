@@ -124,7 +124,7 @@ class PagedView<T extends Object> extends StatelessWidget {
     reverse: scroll.reverse,
     physics: refresh.scrollPhysics(scroll.physics),
     padding: scroll.padding,
-    scrollCacheExtent: scroll.cacheExtent,
+    cacheExtent: scroll.cacheExtent,
   );
 
   /// The item builder the rows use. The group look-back only walks the pages when grouping is on, since
