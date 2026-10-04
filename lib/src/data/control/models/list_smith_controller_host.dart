@@ -7,7 +7,9 @@ import 'package:meta/meta.dart';
 ///
 /// The engine implements it and attaches itself, so the handle and the gesture can't drift apart.
 @internal
-abstract interface class ListSmithControllerHost<T extends Object>._() {
+abstract interface class ListSmithControllerHost<T extends Object> {
+  const ListSmithControllerHost._();
+
   /// See [ListSmithController.refresh].
   Future<void> refresh();
 
